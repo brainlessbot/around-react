@@ -2,12 +2,12 @@ import React from 'react';
 import Header from './layout/Header';
 import Main from './layout/Main';
 import Footer from './layout/Footer';
-import CardAddDialogue from './dialogue/CardAddDialogue';
-import CardViewDialogue from './dialogue/CardViewDialogue';
-import CardRemoveDialogue from './dialogue/CardRemoveDialogue';
-import ProfileEditInfoDialogue from './dialogue/ProfileEditInfoDialogue';
-import ProfileEditAvatarDialogue from './dialogue/ProfileEditAvatarDialogue';
-import ErrorDialogue from './dialogue/ErrorDialogue';
+import CardAddPopup from './popup/CardAddPopup';
+import CardRemovePopup from './popup/CardRemovePopup';
+import ProfileEditInfoPopup from './popup/ProfileEditInfoPopup';
+import ProfileEditAvatarPopup from './popup/ProfileEditAvatarPopup';
+import ImagePopup from './popup/ImagePopup';
+import ErrorPopup from './popup/ErrorPopup';
 import api from '../utilities/api';
 
 /**
@@ -24,22 +24,22 @@ const App = () => {
     // Initialize loading state
     const [isLoading, setIsLoading] = React.useState(true);
 
-    // Initialize dialogue states
-    const [isCardAddDialogueOpen, setIsCardAddDialogueOpen] = React.useState(false);
-    const [isCardViewDialogueOpen, setIsCardViewDialogueOpen] = React.useState(false);
-    const [isCardRemoveDialogueOpen, setIsCardRemoveDialogueOpen] = React.useState(false);
-    const [isProfileEditInfoDialogueOpen, setIsProfileEditInfoDialogueOpen] = React.useState(false);
-    const [isProfileEditAvatarDialogueOpen, setIsProfileEditAvatarDialogueOpen] = React.useState(false);
-    const [isErrorDialogueOpen, setIsErrorDialogueOpen] = React.useState(false);
+    // Initialize popup states
+    const [isCardAddPopupOpen, setIsCardAddPopupOpen] = React.useState(false);
+    const [isCardRemovePopupOpen, setIsCardRemovePopupOpen] = React.useState(false);
+    const [isProfileEditInfoPopupOpen, setIsProfileEditInfoPopupOpen] = React.useState(false);
+    const [isProfileEditAvatarPopupOpen, setIsProfileEditAvatarPopupOpen] = React.useState(false);
+    const [isImagePopupOpen, setIsImagePopupOpen] = React.useState(false);
+    const [isErrorPopupOpen, setIsErrorPopupOpen] = React.useState(false);
 
-    // Initialize dialogue-related states
+    // Initialize popup-related states
     const [selectedCard, setSelectedCard] = React.useState({});
     const [errorMessage, setErrorMessage] = React.useState(undefined);
 
     // Handle an error response from the server
     const handleErrorResponse = (error) => {
         setErrorMessage(error);
-        setIsErrorDialogueOpen(true);
+        setIsErrorPopupOpen(true);
     };
 
     // Update a specific card
@@ -74,12 +74,12 @@ const App = () => {
             <Main
                 userData={userData}
                 cardsData={cardsData}
-                onAddCardClick={() => setIsCardAddDialogueOpen(true)}
-                onEditInfoClick={() => setIsProfileEditInfoDialogueOpen(true)}
-                onEditAvatarClick={() => setIsProfileEditAvatarDialogueOpen(true)}
+                onAddCardClick={() => setIsCardAddPopupOpen(true)}
+                onEditInfoClick={() => setIsProfileEditInfoPopupOpen(true)}
+                onEditAvatarClick={() => setIsProfileEditAvatarPopupOpen(true)}
                 onCardImageClick={(cardData) => {
                     setSelectedCard(cardData);
-                    setIsCardViewDialogueOpen(true);
+                    setIsImagePopupOpen(true);
                 }}
                 onCardLikeClick={(cardData, isLiked) => {
                     const apiRequest = isLiked ? api.dislikeCard(cardData._id) : api.likeCard(cardData._id);
@@ -89,62 +89,62 @@ const App = () => {
                 }}
                 onCardRemoveClick={(cardData) => {
                     setSelectedCard(cardData);
-                    setIsCardRemoveDialogueOpen(true);
+                    setIsCardRemovePopupOpen(true);
                 }}
                 isLoading={isLoading}
             />
 
             <Footer/>
 
-            <CardAddDialogue
-                isOpen={isCardAddDialogueOpen}
-                onCloseClick={() => setIsCardAddDialogueOpen(false)}
+            <CardAddPopup
+                isOpen={isCardAddPopupOpen}
+                onCloseClick={() => setIsCardAddPopupOpen(false)}
                 onFormSubmit={() => {
                     // TODO: Form submission
-                    setIsCardAddDialogueOpen(false);
+                    setIsCardAddPopupOpen(false);
                 }}
             />
 
-            <CardViewDialogue
-                isOpen={isCardViewDialogueOpen}
-                onCloseClick={() => setIsCardViewDialogueOpen(false)}
-                selectedCard={selectedCard}
-            />
-
-            <CardRemoveDialogue
-                isOpen={isCardRemoveDialogueOpen}
-                onCloseClick={() => setIsCardRemoveDialogueOpen(false)}
+            <CardRemovePopup
+                isOpen={isCardRemovePopupOpen}
+                onCloseClick={() => setIsCardRemovePopupOpen(false)}
                 onFormSubmit={() => {
                     api.deleteCard(selectedCard._id)
                         .then(() => {
                             removeCard(selectedCard._id);
-                            setIsCardRemoveDialogueOpen(false);
+                            setIsCardRemovePopupOpen(false);
                         })
                         .catch(handleErrorResponse);
                 }}
             />
 
-            <ProfileEditInfoDialogue
-                isOpen={isProfileEditInfoDialogueOpen}
-                onCloseClick={() => setIsProfileEditInfoDialogueOpen(false)}
+            <ProfileEditInfoPopup
+                isOpen={isProfileEditInfoPopupOpen}
+                onCloseClick={() => setIsProfileEditInfoPopupOpen(false)}
                 onFormSubmit={() => {
                     // TODO: Form submission
-                    setIsProfileEditInfoDialogueOpen(false);
+                    setIsProfileEditInfoPopupOpen(false);
                 }}
             />
 
-            <ProfileEditAvatarDialogue
-                isOpen={isProfileEditAvatarDialogueOpen}
-                onCloseClick={() => setIsProfileEditAvatarDialogueOpen(false)}
+            <ProfileEditAvatarPopup
+                isOpen={isProfileEditAvatarPopupOpen}
+                onCloseClick={() => setIsProfileEditAvatarPopupOpen(false)}
                 onFormSubmit={() => {
                     // TODO: Form submission
-                    setIsProfileEditAvatarDialogueOpen(false);
+                    setIsProfileEditAvatarPopupOpen(false);
                 }}
             />
 
-            <ErrorDialogue
-                isOpen={isErrorDialogueOpen}
-                onCloseClick={() => setIsErrorDialogueOpen(false)}
+            <ImagePopup
+                isOpen={isImagePopupOpen}
+                onCloseClick={() => setIsImagePopupOpen(false)}
+                selectedCard={selectedCard}
+            />
+
+            <ErrorPopup
+                isOpen={isErrorPopupOpen}
+                onCloseClick={() => setIsErrorPopupOpen(false)}
                 errorMessage={errorMessage}
             />
         </div>
