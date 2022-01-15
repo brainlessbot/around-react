@@ -18,18 +18,18 @@ const ProfileEditAvatarPopup = ({isOpen, onCloseClick, onFormSubmit}) => {
             formSettings={{
                 id: 'profile-edit-avatar',
                 title: 'Change Profile Picture',
-                fields: [
-                    {
-                        name: 'avatar',
-                        type: 'url',
-                        placeholder: 'Avatar link',
-                        autoComplete: 'off',
-                        required: true
-                    }
-                ],
                 submitButton: 'Save'
             }}
-        />
+        >
+            <input
+                name="avatar"
+                type="url"
+                placeholder="Avatar link"
+                className="popup__form-field"
+                autoComplete="off"
+                required
+            />
+        </PopupWithForm>
     );
 };
 

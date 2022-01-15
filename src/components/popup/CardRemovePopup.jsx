@@ -18,8 +18,8 @@ const CardRemovePopup = ({isOpen, onCloseClick, onFormSubmit}) => {
             formSettings={{
                 id: 'card-remove',
                 title: 'Are you sure?',
-                fields: [],
-                submitButton: 'Yes'
+                submitButton: 'Yes',
+                isCompact: true
             }}
         />
     );

@@ -18,29 +18,31 @@ const ProfileEditInfoPopup = ({isOpen, onCloseClick, onFormSubmit}) => {
             formSettings={{
                 id: 'profile-edit-info',
                 title: 'Edit Profile',
-                fields: [
-                    {
-                        name: 'name',
-                        type: 'text',
-                        placeholder: 'Name',
-                        minLength: 2,
-                        maxLength: 40,
-                        autoComplete: 'off',
-                        required: true
-                    },
-                    {
-                        name: 'about',
-                        type: 'text',
-                        placeholder: 'About',
-                        minLength: 2,
-                        maxLength: 200,
-                        autoComplete: 'off',
-                        required: true
-                    }
-                ],
                 submitButton: 'Save'
             }}
-        />
+        >
+            <input
+                name="name"
+                type="text"
+                placeholder="Name"
+                className="popup__form-field"
+                minLength={2}
+                maxLength={40}
+                autoComplete="off"
+                required
+            />
+
+            <input
+                name="about"
+                type="text"
+                placeholder="About"
+                className="popup__form-field"
+                minLength={2}
+                maxLength={200}
+                autoComplete="off"
+                required
+            />
+        </PopupWithForm>
     );
 };
 

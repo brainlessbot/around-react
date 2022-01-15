@@ -10,12 +10,10 @@ import {combineClasses} from '../../utilities/helpers';
  * @param {Function} onCloseClick
  * @param {Function} onFormSubmit
  * @param {Object} formSettings
+ * @param {JSX.Element[]} children
  * @return {JSX.Element}
  */
-const PopupWithForm = ({isOpen, onCloseClick, onFormSubmit, formSettings}) => {
-    // If the form has no fields, it'll be rendered with a compact design
-    const isCompact = !formSettings.fields.length;
-
+const PopupWithForm = ({isOpen, onCloseClick, onFormSubmit, formSettings, children}) => {
     // Handle the submission of the form
     const handleFormSubmit = (event) => {
         event.preventDefault();
@@ -30,7 +28,7 @@ const PopupWithForm = ({isOpen, onCloseClick, onFormSubmit, formSettings}) => {
         >
             <h2 className={combineClasses(
                 'popup__title',
-                isCompact && 'popup__title_compact'
+                formSettings.isCompact && 'popup__title_compact'
             )}>
                 {formSettings.title}
             </h2>
@@ -39,20 +37,13 @@ const PopupWithForm = ({isOpen, onCloseClick, onFormSubmit, formSettings}) => {
                 id={formSettings.id}
                 className="popup__form"
                 onSubmit={handleFormSubmit}
-                noValidate
             >
-                {formSettings.fields.map((fieldSettings) => (
-                    <input
-                        key={fieldSettings.name}
-                        className="popup__form-field"
-                        {...fieldSettings}
-                    />
-                ))}
+                {children}
                 <button
                     type="submit"
                     className={combineClasses(
                         'popup__submit-button',
-                        isCompact && 'popup__submit-button_compact'
+                        formSettings.isCompact && 'popup__submit-button_compact'
                     )}
                 >
                     {formSettings.submitButton}

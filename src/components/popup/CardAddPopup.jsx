@@ -18,27 +18,29 @@ const CardAddPopup = ({isOpen, onCloseClick, onFormSubmit}) => {
             formSettings={{
                 id: 'card-add',
                 title: 'New Card',
-                fields: [
-                    {
-                        name: 'name',
-                        type: 'text',
-                        placeholder: 'Name',
-                        minLength: 1,
-                        maxLength: 30,
-                        autoComplete: 'off',
-                        required: true
-                    },
-                    {
-                        name: 'link',
-                        type: 'url',
-                        placeholder: 'Image link',
-                        autoComplete: 'off',
-                        required: true
-                    }
-                ],
                 submitButton: 'Save'
             }}
-        />
+        >
+            <input
+                name="name"
+                type="text"
+                placeholder="Name"
+                className="popup__form-field"
+                minLength={1}
+                maxLength={30}
+                autoComplete="off"
+                required
+            />
+
+            <input
+                name="link"
+                type="url"
+                placeholder="Image link"
+                className="popup__form-field"
+                autoComplete="off"
+                required
+            />
+        </PopupWithForm>
     );
 };
 
