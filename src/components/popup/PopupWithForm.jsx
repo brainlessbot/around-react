@@ -10,10 +10,11 @@ import {combineClasses} from '../../utilities/helpers';
  * @param {Function} onCloseClick
  * @param {Function} onFormSubmit
  * @param {Object} formSettings
+ * @param {boolean} isProcessing
  * @param {JSX.Element[]} children
  * @return {JSX.Element}
  */
-const PopupWithForm = ({isOpen, onCloseClick, onFormSubmit, formSettings, children}) => {
+const PopupWithForm = ({isOpen, onCloseClick, onFormSubmit, formSettings, isProcessing, children}) => {
     // Handle the submission of the form
     const handleFormSubmit = (event) => {
         event.preventDefault();
@@ -43,10 +44,12 @@ const PopupWithForm = ({isOpen, onCloseClick, onFormSubmit, formSettings, childr
                     type="submit"
                     className={combineClasses(
                         'popup__submit-button',
-                        formSettings.isCompact && 'popup__submit-button_compact'
+                        formSettings.isCompact && 'popup__submit-button_compact',
+                        isProcessing && 'popup__submit-button_disabled'
                     )}
+                    disabled={isProcessing}
                 >
-                    {formSettings.submitButton}
+                    {isProcessing ? 'Processing...' : formSettings.submitButton}
                 </button>
             </form>
         </PopupTemplate>

@@ -1,40 +1,25 @@
 import React from 'react';
 import ProfileInfo from '../profile/ProfileInfo';
 import ProfileCards from '../profile/ProfileCards';
-import api from '../../utilities/api';
+import CurrentUserContext from '../../contexts/CurrentUserContext';
 
 /**
  * Represent the main-content section.
  *
  * @constructor
+ * @param {Object} cardsData
  * @param {Function} onAddCardClick
  * @param {Function} onEditInfoClick
  * @param {Function} onEditAvatarClick
  * @param {Function} onCardImageClick
  * @param {Function} onCardLikeClick
  * @param {Function} onCardRemoveClick
- * @param {Function} handleErrorResponse
+ * @param {boolean} isLoading
  * @return {JSX.Element}
  */
-const Main = ({onAddCardClick, onEditInfoClick, onEditAvatarClick, onCardImageClick, onCardLikeClick, onCardRemoveClick, handleErrorResponse}) => {
-    // Initialize API-data states
-    const [userData, setUserData] = React.useState({});
-    const [cardsData, setCardsData] = React.useState([]);
-
-    // Initialize loading state
-    const [isLoading, setIsLoading] = React.useState(true);
-
-    // Load data from API on mounting
-    React.useEffect(() => {
-        Promise
-            .all([api.getUserInfo(), api.getAllCards()])
-            .then(([userResponse, cardsResponse]) => {
-                setUserData(userResponse);
-                setCardsData(cardsResponse);
-                setIsLoading(false);
-            })
-            .catch(handleErrorResponse);
-    }, []);
+const Main = ({cardsData, onAddCardClick, onEditInfoClick, onEditAvatarClick, onCardImageClick, onCardLikeClick, onCardRemoveClick, isLoading}) => {
+    // Subscribe to logged-in user context
+    const userData = React.useContext(CurrentUserContext);
 
     return (
         <main className="content page__content">
@@ -50,7 +35,6 @@ const Main = ({onAddCardClick, onEditInfoClick, onEditAvatarClick, onCardImageCl
                     />
 
                     <ProfileCards
-                        userData={userData}
                         cardsData={cardsData}
                         onCardImageClick={onCardImageClick}
                         onCardLikeClick={onCardLikeClick}

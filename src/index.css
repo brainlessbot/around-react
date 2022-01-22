@@ -33,6 +33,7 @@
 @import url('blocks/popup/__overlay/popup__overlay.css');
 @import url('blocks/popup/__submit-button/popup__submit-button.css');
 @import url('blocks/popup/__submit-button/_compact/popup__submit-button_compact.css');
+@import url('blocks/popup/__submit-button/_disabled/popup__submit-button_disabled.css');
 @import url('blocks/popup/__title/popup__title.css');
 @import url('blocks/popup/__title/_compact/popup__title_compact.css');
 @import url('./blocks/footer/footer.css');

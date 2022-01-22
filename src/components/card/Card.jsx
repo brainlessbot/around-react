@@ -1,3 +1,5 @@
+import React from 'react';
+import CurrentUserContext from '../../contexts/CurrentUserContext';
 import {combineClasses} from '../../utilities/helpers';
 
 /**
@@ -5,17 +7,19 @@ import {combineClasses} from '../../utilities/helpers';
  *
  * @constructor
  * @param {Object} cardData
- * @param {Object} userData
  * @param {Function} onCardImageClick
  * @param {Function} onCardLikeClick
  * @param {Function} onCardRemoveClick
  * @return {JSX.Element}
  */
-const Card = ({cardData, userData, onCardImageClick, onCardLikeClick, onCardRemoveClick}) => {
-    // Whether the current user is the owner of the card
+const Card = ({cardData, onCardImageClick, onCardLikeClick, onCardRemoveClick}) => {
+    // Subscribe to logged-in user context
+    const userData = React.useContext(CurrentUserContext);
+
+    // Represent whether the current user is the owner of the card
     const isOwner = cardData.owner._id === userData._id;
 
-    // Whether the current user has liked the card
+    // Represent whether the current user has liked the card
     const isLiked = cardData.likes.some((likingUser) => likingUser._id === userData._id);
 
     // Event handlers

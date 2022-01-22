@@ -4,11 +4,11 @@ import PopupTemplate from './PopupTemplate';
  * Represent an error popup.
  *
  * @constructor
+ * @param {string} errorMessage
  * @param {boolean} isOpen
  * @param {Function} onCloseClick
- * @param {string} errorMessage
  */
-const ErrorPopup = ({isOpen, onCloseClick, errorMessage}) => {
+const ErrorPopup = ({errorMessage, isOpen, onCloseClick}) => {
     return (
         <PopupTemplate
             contentType="error"

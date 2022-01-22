@@ -13,26 +13,31 @@ import {combineClasses} from '../../utilities/helpers';
  * @return {JSX.Element}
  */
 const PopupTemplate = ({contentType, isOpen, onCloseClick, isNotification = false, children}) => {
-    let timeoutId = undefined;
+    // Latest timeout used, so it can be cleared when the popup is closed
+    let latestTimeout = undefined;
 
-    // Handle closing the popup and remove timeout (if exists)
+    // If the popup is a notification, define after how many seconds the popup is closed automatically
+    const timeoutSeconds = 3;
+
+    // Handle closing the popup and clear timeout (if exists)
     const handlePopupClosing = () => {
-        timeoutId && clearTimeout(timeoutId);
+        latestTimeout && clearTimeout(latestTimeout);
         onCloseClick();
     };
 
     // Handle closing the popup if Escape button was pressed
     const handleEscKeydown = (event) => event.key === 'Escape' && handlePopupClosing();
 
+    // Popup side effects
     React.useEffect(() => {
         // Allow closing the popup by pressing Escape button
         if (isOpen) {
             document.addEventListener('keydown', handleEscKeydown);
         }
 
-        // Close notifications automatically after 3 seconds
+        // Close notifications automatically after X seconds
         if (isOpen && isNotification) {
-            timeoutId = setTimeout(handlePopupClosing, 3000);
+            latestTimeout = setTimeout(handlePopupClosing, timeoutSeconds * 1000);
         }
 
         return () => document.removeEventListener('keydown', handleEscKeydown);

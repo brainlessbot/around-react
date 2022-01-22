@@ -4,11 +4,11 @@ import PopupTemplate from './PopupTemplate';
  * Represent a card view popup.
  *
  * @constructor
+ * @param {Object} selectedCard
  * @param {boolean} isOpen
  * @param {Function} onCloseClick
- * @param {Object} selectedCard
  */
-const ImagePopup = ({isOpen, onCloseClick, selectedCard}) => {
+const ImagePopup = ({selectedCard, isOpen, onCloseClick}) => {
     return (
         <PopupTemplate
             contentType="image"

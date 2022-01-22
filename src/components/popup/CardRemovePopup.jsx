@@ -1,3 +1,4 @@
+import React from 'react';
 import PopupWithForm from './PopupWithForm';
 
 /**
@@ -10,17 +11,27 @@ import PopupWithForm from './PopupWithForm';
  * @return {JSX.Element}
  */
 const CardRemovePopup = ({isOpen, onCloseClick, onFormSubmit}) => {
+    // Initialize processing state
+    const [isProcessing, setIsProcessing] = React.useState(false);
+
+    // Handle the submission of the form
+    const handleFormSubmit = () => {
+        setIsProcessing(true);
+        onFormSubmit(() => setIsProcessing(false));
+    };
+
     return (
         <PopupWithForm
             isOpen={isOpen}
             onCloseClick={onCloseClick}
-            onFormSubmit={onFormSubmit}
+            onFormSubmit={handleFormSubmit}
             formSettings={{
                 id: 'card-remove',
                 title: 'Are you sure?',
                 submitButton: 'Yes',
                 isCompact: true
             }}
+            isProcessing={isProcessing}
         />
     );
 };
