@@ -1,6 +1,6 @@
 import React from 'react';
 import PopupWithForm from './PopupWithForm';
-import CurrentUserContext from '../../contexts/CurrentUserContext';
+import CurrentUserContext from '../contexts/CurrentUserContext';
 
 /**
  * Represent profile edit info popup.
@@ -11,7 +11,7 @@ import CurrentUserContext from '../../contexts/CurrentUserContext';
  * @param {Function} onFormSubmit
  * @return {JSX.Element}
  */
-const ProfileEditInfoPopup = ({isOpen, onCloseClick, onFormSubmit}) => {
+const EditProfilePopup = ({isOpen, onCloseClick, onFormSubmit}) => {
     // Subscribe to logged-in user context
     const userData = React.useContext(CurrentUserContext);
 
@@ -85,4 +85,4 @@ const ProfileEditInfoPopup = ({isOpen, onCloseClick, onFormSubmit}) => {
     );
 };
 
-export default ProfileEditInfoPopup;
+export default EditProfilePopup;

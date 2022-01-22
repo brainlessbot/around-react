@@ -10,7 +10,7 @@ import PopupWithForm from './PopupWithForm';
  * @param {Function} onFormSubmit
  * @return {JSX.Element}
  */
-const CardAddPopup = ({isOpen, onCloseClick, onFormSubmit}) => {
+const AddPlacePopup = ({isOpen, onCloseClick, onFormSubmit}) => {
     // Initialize input states
     const [nameInput, setNameInput] = React.useState('');
     const [linkInput, setLinkInput] = React.useState('');
@@ -76,4 +76,4 @@ const CardAddPopup = ({isOpen, onCloseClick, onFormSubmit}) => {
     );
 };
 
-export default CardAddPopup;
+export default AddPlacePopup;

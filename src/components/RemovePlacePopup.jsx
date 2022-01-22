@@ -10,7 +10,7 @@ import PopupWithForm from './PopupWithForm';
  * @param {Function} onFormSubmit
  * @return {JSX.Element}
  */
-const CardRemovePopup = ({isOpen, onCloseClick, onFormSubmit}) => {
+const RemovePlacePopup = ({isOpen, onCloseClick, onFormSubmit}) => {
     // Initialize processing state
     const [isProcessing, setIsProcessing] = React.useState(false);
 
@@ -36,4 +36,4 @@ const CardRemovePopup = ({isOpen, onCloseClick, onFormSubmit}) => {
     );
 };
 
-export default CardRemovePopup;
+export default RemovePlacePopup;

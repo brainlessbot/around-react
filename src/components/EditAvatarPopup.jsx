@@ -10,7 +10,7 @@ import PopupWithForm from './PopupWithForm';
  * @param {Function} onFormSubmit
  * @return {JSX.Element}
  */
-const ProfileEditAvatarPopup = ({isOpen, onCloseClick, onFormSubmit}) => {
+const EditAvatarPopup = ({isOpen, onCloseClick, onFormSubmit}) => {
     // Initialize input references
     const avatarInputRef = React.useRef();
 
@@ -55,4 +55,4 @@ const ProfileEditAvatarPopup = ({isOpen, onCloseClick, onFormSubmit}) => {
     );
 };
 
-export default ProfileEditAvatarPopup;
+export default EditAvatarPopup;

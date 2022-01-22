@@ -1,7 +1,7 @@
 import React from 'react';
-import ProfileInfo from '../profile/ProfileInfo';
-import ProfileCards from '../profile/ProfileCards';
-import CurrentUserContext from '../../contexts/CurrentUserContext';
+import ProfileInfo from './ProfileInfo';
+import ProfileCards from './ProfileCards';
+import CurrentUserContext from '../contexts/CurrentUserContext';
 
 /**
  * Represent the main-content section.

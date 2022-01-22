@@ -1,6 +1,6 @@
 import React from 'react';
 import PopupTemplate from './PopupTemplate';
-import {combineClasses} from '../../utilities/helpers';
+import {combineClasses} from '../utils/helpers';
 
 /**
  * Represent a basic popup with a form.

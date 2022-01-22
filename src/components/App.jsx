@@ -1,15 +1,15 @@
 import React from 'react';
-import Header from './layout/Header';
-import Main from './layout/Main';
-import Footer from './layout/Footer';
-import CardAddPopup from './popup/CardAddPopup';
-import CardRemovePopup from './popup/CardRemovePopup';
-import ProfileEditInfoPopup from './popup/ProfileEditInfoPopup';
-import ProfileEditAvatarPopup from './popup/ProfileEditAvatarPopup';
-import ImagePopup from './popup/ImagePopup';
-import ErrorPopup from './popup/ErrorPopup';
+import Header from './Header';
+import Main from './Main';
+import Footer from './Footer';
+import AddPlacePopup from './AddPlacePopup';
+import RemovePlacePopup from './RemovePlacePopup';
+import EditProfilePopup from './EditProfilePopup';
+import EditAvatarPopup from './EditAvatarPopup';
+import ImagePopup from './ImagePopup';
+import ErrorPopup from './ErrorPopup';
 import CurrentUserContext from '../contexts/CurrentUserContext';
-import api from '../utilities/api';
+import api from '../utils/api';
 
 /**
  * Represent application's entry component.
@@ -26,10 +26,10 @@ const App = () => {
     const [isLoading, setIsLoading] = React.useState(true);
 
     // Initialize popup states
-    const [isCardAddPopupOpen, setIsCardAddPopupOpen] = React.useState(false);
-    const [isCardRemovePopupOpen, setIsCardRemovePopupOpen] = React.useState(false);
-    const [isProfileEditInfoPopupOpen, setIsProfileEditInfoPopupOpen] = React.useState(false);
-    const [isProfileEditAvatarPopupOpen, setIsProfileEditAvatarPopupOpen] = React.useState(false);
+    const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
+    const [isRemovePlacePopupOpen, setIsRemovePlacePopupOpen] = React.useState(false);
+    const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
+    const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
     const [isImagePopupOpen, setIsImagePopupOpen] = React.useState(false);
     const [isErrorPopupOpen, setIsErrorPopupOpen] = React.useState(false);
 
@@ -71,13 +71,13 @@ const App = () => {
      */
 
     // Handle opening the card-add popup
-    const handleAddCardClick = () => setIsCardAddPopupOpen(true);
+    const handleAddCardClick = () => setIsAddPlacePopupOpen(true);
 
     // Handle opening the profile-edit-info popup
-    const handleEditInfoClick = () => setIsProfileEditInfoPopupOpen(true);
+    const handleEditInfoClick = () => setIsEditProfilePopupOpen(true);
 
     // Handle opening the profile-edit-avatar popup
-    const handleEditAvatarClick = () => setIsProfileEditAvatarPopupOpen(true);
+    const handleEditAvatarClick = () => setIsEditAvatarPopupOpen(true);
 
     // Handle opening the image popup
     const handleCardImageClick = (cardData) => {
@@ -94,7 +94,7 @@ const App = () => {
     // Handle opening the card-remove popup
     const handleCardRemoveClick = (cardData) => {
         setSelectedCard(cardData);
-        setIsCardRemovePopupOpen(true);
+        setIsRemovePlacePopupOpen(true);
     };
 
     /*
@@ -104,56 +104,56 @@ const App = () => {
      */
 
     // Handle closing the card-add popup
-    const handleCardAddCloseClick = () => setIsCardAddPopupOpen(false);
+    const handleCardAddCloseClick = () => setIsAddPlacePopupOpen(false);
 
     // Handle form submission in card-add popup
     const handleCardAddFormSubmit = (inputValues, onServerResponse) => {
         api.addCard(inputValues)
             .then((response) => {
                 addCard(response);
-                setIsCardAddPopupOpen(false);
+                setIsAddPlacePopupOpen(false);
             })
             .catch(handleErrorResponse)
             .finally(onServerResponse);
     };
 
     // Handle closing the card-remove popup
-    const handleCardRemoveCloseClick = () => setIsCardRemovePopupOpen(false);
+    const handleCardRemoveCloseClick = () => setIsRemovePlacePopupOpen(false);
 
     // Handle form submission in card-remove popup
     const handleCardRemoveFormSubmit = (onServerResponse) => {
         api.deleteCard(selectedCard._id)
             .then(() => {
                 removeCard(selectedCard);
-                setIsCardRemovePopupOpen(false);
+                setIsRemovePlacePopupOpen(false);
             })
             .catch(handleErrorResponse)
             .finally(onServerResponse);
     };
 
     // Handle closing the profile-edit-info popup
-    const handleProfileEditInfoCloseClick = () => setIsProfileEditInfoPopupOpen(false);
+    const handleProfileEditInfoCloseClick = () => setIsEditProfilePopupOpen(false);
 
     // Handle form submission in profile-edit-info popup
     const handleProfileEditInfoFormSubmit = (inputValues, onServerResponse) => {
         api.updateUserInfo(inputValues)
             .then((response) => {
                 setUserData(response);
-                setIsProfileEditInfoPopupOpen(false);
+                setIsEditProfilePopupOpen(false);
             })
             .catch(handleErrorResponse)
             .finally(onServerResponse);
     };
 
     // Handle closing the profile-edit-avatar popup
-    const handleProfileEditAvatarCloseClick = () => setIsProfileEditAvatarPopupOpen(false);
+    const handleProfileEditAvatarCloseClick = () => setIsEditAvatarPopupOpen(false);
 
     // Handle form submission in profile-edit-avatar popup
     const handleProfileEditAvatarFormSubmit = (inputValues, onServerResponse) => {
         api.updateUserAvatar(inputValues)
             .then((response) => {
                 setUserData(response);
-                setIsProfileEditAvatarPopupOpen(false);
+                setIsEditAvatarPopupOpen(false);
             })
             .catch(handleErrorResponse)
             .finally(onServerResponse);
@@ -201,26 +201,26 @@ const App = () => {
 
                 <Footer/>
 
-                <CardAddPopup
-                    isOpen={isCardAddPopupOpen}
+                <AddPlacePopup
+                    isOpen={isAddPlacePopupOpen}
                     onCloseClick={handleCardAddCloseClick}
                     onFormSubmit={handleCardAddFormSubmit}
                 />
 
-                <CardRemovePopup
-                    isOpen={isCardRemovePopupOpen}
+                <RemovePlacePopup
+                    isOpen={isRemovePlacePopupOpen}
                     onCloseClick={handleCardRemoveCloseClick}
                     onFormSubmit={handleCardRemoveFormSubmit}
                 />
 
-                <ProfileEditInfoPopup
-                    isOpen={isProfileEditInfoPopupOpen}
+                <EditProfilePopup
+                    isOpen={isEditProfilePopupOpen}
                     onCloseClick={handleProfileEditInfoCloseClick}
                     onFormSubmit={handleProfileEditInfoFormSubmit}
                 />
 
-                <ProfileEditAvatarPopup
-                    isOpen={isProfileEditAvatarPopupOpen}
+                <EditAvatarPopup
+                    isOpen={isEditAvatarPopupOpen}
                     onCloseClick={handleProfileEditAvatarCloseClick}
                     onFormSubmit={handleProfileEditAvatarFormSubmit}
                 />

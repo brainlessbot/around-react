@@ -1,5 +1,5 @@
 import React from 'react';
-import {combineClasses} from '../../utilities/helpers';
+import {combineClasses} from '../utils/helpers';
 
 /**
  * Represent a basic popup template.

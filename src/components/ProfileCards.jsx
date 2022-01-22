@@ -1,4 +1,4 @@
-import Card from '../card/Card';
+import Card from './Card';
 
 /**
  * Represent the profile-cards section.

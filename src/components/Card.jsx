@@ -1,6 +1,6 @@
 import React from 'react';
-import CurrentUserContext from '../../contexts/CurrentUserContext';
-import {combineClasses} from '../../utilities/helpers';
+import CurrentUserContext from '../contexts/CurrentUserContext';
+import {combineClasses} from '../utils/helpers';
 
 /**
  * Represent a card element.
